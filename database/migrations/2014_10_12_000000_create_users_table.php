@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image')->nullable();
-            $table->date('tanggal_lahir');
+            $table->string('tanggal_lahir');
             $table->enum('user_type',[
                 'admin','user'
             ])->default('user');
