@@ -66,6 +66,20 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="form-group{{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">
+                            <label for="tanggal_lahir" class="col-md-4 control-label">Tanggal Lahir</label>
+
+                            <div class="col-md-6">
+                                <input id="tanggal_lahir" type="tanggal_lahir" class="form-control" name="tanggal_lahir" required placeholder="tanggal-bulan-tahun">
+
+                                @if ($errors->has('tanggal_lahir'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tanggal_lahir') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <hr>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
