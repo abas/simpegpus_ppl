@@ -11,8 +11,22 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group{{ $errors->has('nim') ? ' has-error' : '' }}">
+                            <label for="nim" class="col-md-4 control-label">Nim</label>
+
+                            <div class="col-md-6">
+                                <input id="nim" type="text" class="form-control" name="nim" value="{{ old('nim') }}" required autofocus>
+
+                                @if ($errors->has('nim'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nim') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nama</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -25,6 +39,34 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('fakultas') ? ' has-error' : '' }}">
+                            <label for="fakultas" class="col-md-4 control-label">Fakultas</label>
+
+                            <div class="col-md-6">
+                                <input id="fakultas" type="fakultas" class="form-control" name="fakultas" required>
+
+                                @if ($errors->has('fakultas'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('fakultas') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('progdi') ? ' has-error' : '' }}">
+                            <label for="progdi" class="col-md-4 control-label">Program Studi</label>
+
+                            <div class="col-md-6">
+                                <input id="progdi" type="progdi" class="form-control" name="progdi" required>
+
+                                @if ($errors->has('progdi'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('progdi') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <hr>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -60,6 +102,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
