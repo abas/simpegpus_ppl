@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
-    public function ganti_user(Request $request, $id, $type)
+    public function get_user($id)
     {
         $user = User::find($id);
-        $user->user_type = $request->$type;
-        $user->update();
         return $user;
     }
 }
