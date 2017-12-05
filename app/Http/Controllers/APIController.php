@@ -10,6 +10,6 @@ class APIController extends Controller
     public function get_user()
     {
         $user = User::All();
-        return $user;
+        return $user; 
     }
 }
