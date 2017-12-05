@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/users','APIController@get_user')->name('users');
+Route::get('/users','APIController@get_user')->name('users');
