@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class APIController extends Controller
 {
-    public function get_user($id)
+    public function get_user()
     {
-        $user = User::find($id);
+        $user = User::All();
         return $user;
     }
 }
