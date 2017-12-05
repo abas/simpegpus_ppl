@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/change-user/{id}/{type_user}','APIController@ganti_user')->name('ganti_user');
