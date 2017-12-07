@@ -19,4 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/users','APIController@get_user')->name('users');
+
+// API public ===============================================
+// get All User
+Route::get('/users','APIController@get_user');
+
+// get Specific User
+Route::get('/users/{id}','APIController@get_user_info');
+
+// is User Admin ?
+Route::get('/users/is-admin/{id}','APIController@isAdmin');

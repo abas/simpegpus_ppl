@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Fucking dude!
+                    {{$user->name}}
                 </div>
             </div>
         </div>
