@@ -29,7 +29,11 @@ class HomeController extends Controller
     {
         $user = Auth::User();
         $user_id = $user->id;
-        $mhs = DataSiswa::All()->where('id_user','=',$user_id);
+        if($user->user_type == 'admin'){
+            $mhs = DataSiswa::All();
+        }else{
+            $mhs = DataSiswa::All()->where('id_user','=',$user_id);
+        }
         return view('home',compact('user','mhs'));
     }
 
