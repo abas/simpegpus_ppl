@@ -28,7 +28,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $mhs = DataSiswa::All();
+        $user_id = $user->id;
+        $mhs = DataSiswa::All()->where('id_user','=',$user_id);
         return view('home',compact('user','mhs'));
     }
 
