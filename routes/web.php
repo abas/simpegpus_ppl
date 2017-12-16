@@ -17,7 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::group(['prefix'=>'home'],function(){
+        Route::get('/add',['as'=>'add','uses'=>'HomeController@add']);
+        Route::post('/add',['as'=>'addData','uses'=>'HomeController@addData']);
+    });
+});
 
 
 // API public ===============================================
