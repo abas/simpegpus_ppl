@@ -71,11 +71,16 @@ class HomeController extends Controller
         $id_user = Auth::User()->id;
         $data = new DataSiswa();
 
+        
         $data->id_user = $id_user;
         $data->nama_siswa = $req->nama_siswa;
         $data->nim = $req->nim;
         $data->mata_kuliah = $req->mata_kuliah;
-        $data->nilai = $req->nilai;
+        if($req->nilai > 100){
+            $data->nilai = 100;
+        }else{
+            $data->nilai = $req->nilai;
+        }
         
         $data->save();
 
