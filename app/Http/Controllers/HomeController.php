@@ -77,7 +77,9 @@ class HomeController extends Controller
         $data->nim = $req->nim;
         $data->mata_kuliah = $req->mata_kuliah;
         if($req->nilai > 100){
-            $data->nilai = 100;
+            return redirect(route('add'))
+            ->withInput()
+            ->with("msg","nilai tidak boleh lebih dari 100");
         }else{
             $data->nilai = $req->nilai;
         }
