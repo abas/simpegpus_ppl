@@ -11,11 +11,11 @@ class InstansiSeed extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker,Carbon $carbon)
+    public function run(Carbon $carbon)
     {
         for ($i=0; $i < 5; $i++) { 
             DB::table('instansis')->insert([
-              'nama_instansi' => $faker->name,
+              'nama_instansi' => str_random(5),
               'created_at'    => $carbon->now()->toDateString(),
               'updated_at'    => $carbon->now()->toDateString(),
             ]);

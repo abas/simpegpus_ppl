@@ -15,7 +15,7 @@ class MutasiSeeder extends Seeder
     {
         DB::table('mutasis')->insert([
             'pegawai_id'    => 7,
-            'status_mutasi' => $faker->numberBetween(0,3),
+            'status_mutasi' => str_random(3),
             'instansi_id'   => 3,
             'created_at'    => $carbon->now()->toDateString(),
             'updated_at'    => $carbon->now()->toDateString(),
