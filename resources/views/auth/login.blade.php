@@ -1,69 +1,110 @@
-@extends('layouts.app')
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Remove Tap Highlight on Windows Phone IE -->
+  <meta name="msapplication-tap-highlight" content="no" />
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+  <link rel="icon" type="image/png" href="{{asset('altair/assets/img/favicon-16x16.png')}}" sizes="16x16">
+  <link rel="icon" type="image/png" href="{{asset('altair/assets/img/favicon-32x32.png')}}" sizes="32x32">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+  <title>Altair Admin v2.2.0 - Login Page</title>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+  {{-- <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='stylesheet' type='text/css'> --}}
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+  <!-- uikit -->
+  <link rel="stylesheet" href="{{asset('altair/bower_components/uikit/css/uikit.almost-flat.min.css')}}" />
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+  <!-- altair admin login page -->
+  <link rel="stylesheet" href="{{asset('altair/assets/css/login_page.min.css')}}" />
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+</head>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+<body class="login_page">
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div class="login_page_wrapper">
+    <div class="md-card" id="login_card">
+      <div class="md-card-content large-padding" id="login_form">
+        <div class="login_heading">
+          <div class="user_avatar"></div>
         </div>
+        {{-- form login --}}
+        <form action="{{route('login')}}" method="POST">
+          {{ csrf_field() }}
+          {{-- <div class="uk-form-row">
+            <div class="uk-input">
+              {{$errors}}
+            </div>
+          </div> --}}
+          <div class="uk-form-row">
+            <label for="login_username">Email</label>
+            <input 
+              class="
+                md-input 
+                {{$errors->has('email') ? ' md-input-danger' : ''}}
+                "
+              type="text" 
+              id="login_username" 
+              name="email" />
+          </div>
+          <div class="uk-form-row">
+            <label for="login_password">Password</label>
+            <input 
+              class="
+                md-input
+                {{$errors->has('password') ? ' md-input-danger' : ''}}
+                "
+              type="password" 
+              id="login_password" 
+              name="password" />
+          </div>
+          <div class="uk-margin-medium-top">
+            <button type="submit" class="md-btn md-btn-primary md-btn-block md-btn-large">Sign In</button>
+          </div>
+          <div class="uk-margin-top">
+            <span class="icheck-inline">
+              <input type="checkbox" name="remember" id="login_page_stay_signed" data-md-icheck />
+              <label for="login_page_stay_signed" class="inline-label">Stay signed in</label>
+            </span>
+            <a class="uk-float-right" href="{{route('register')}}">Create an account</a>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
-@endsection
+    
+  </div>
+
+  <!-- common functions -->
+  <script src="{{asset('altair/assets/js/common.min.js')}}"></script>
+  <!-- altair core functions -->
+  <script src="{{asset('altair/assets/js/altair_admin_common.min.js')}}"></script>
+
+  <!-- altair login page functions -->
+  <script src="{{asset('altair/assets/js/pages/login.min.js')}}"></script>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-65191727-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

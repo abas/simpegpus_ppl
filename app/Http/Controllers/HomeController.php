@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\User;
-use App\DataSiswa;
-use Validator;
+use Carbon\Carbon;
+use Session,Redirect,Validator;
+use App\Absen,App\Cuti,App\Instansi,App\Mutasi,App\Pegawai,App\Stugas,App\User;
 
 class HomeController extends Controller
 {
@@ -27,65 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::User();
-        $user_id = $user->id;
-        if($user->user_type == 'admin'){
-            $mhs = DataSiswa::All();
-        }else{
-            $mhs = DataSiswa::All()->where('id_user','=',$user_id);
-        }
-        return view('home',compact('user','mhs'));
-    }
-
-    public function add()
-    {
-        return view('tambah');
-    }
-
-    public function addData(Request $req)
-    {
-        $rules = [
-            'nama_siswa'         => 'required',
-            'nim'      => 'required',
-            'mata_kuliah'       => 'required',
-            'nilai'       => 'required'
-            
-        ];
-        
-        $validator = Validator::make($req->all(),$rules);
-        if($validator->fails()){
-            return redirect(route('add'))
-                  ->withInput()
-                  ->withErrors($validator);
-        }
-
-        $this->validate($req, $rules);
-        // 
-
-        if(ucwords($req->nim)!=$req->nim){
-            return redirect(route('add'))
-            ->withInput()
-            ->with("msg","nim harus diawali dengan huruf besar");
-        }
-
-        $id_user = Auth::User()->id;
-        $data = new DataSiswa();
-
-        
-        $data->id_user = $id_user;
-        $data->nama_siswa = $req->nama_siswa;
-        $data->nim = $req->nim;
-        $data->mata_kuliah = $req->mata_kuliah;
-        if($req->nilai > 100){
-            return redirect(route('add'))
-            ->withInput()
-            ->with("msg","nilai tidak boleh lebih dari 100");
-        }else{
-            $data->nilai = $req->nilai;
-        }
-        
-        $data->save();
-
-        return redirect(route('home'))->with('msg','success input');
+        $pegawais = Pegawai::select('*')->paginate(6);
+        $newPegawais = Pegawai::orderBy('created_at','desc')->take(5)->get();
+        // return $newPegawai;
+        return view('home',compact(
+            'pegawais','newPegawais'
+        ));
     }
 }

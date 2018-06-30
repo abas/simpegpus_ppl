@@ -1,134 +1,120 @@
-@extends('layouts.app')
+<!doctype html>
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en">
+<!--<![endif]-->
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Remove Tap Highlight on Windows Phone IE -->
+  <meta name="msapplication-tap-highlight" content="no" />
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
+  <link rel="icon" type="image/png" href="{{asset('altair/assets/img/favicon-16x16.png')}}" sizes="16x16">
+  <link rel="icon" type="image/png" href="{{asset('altair/assets/img/favicon-32x32.png')}}" sizes="32x32">
 
-                        <div class="form-group{{ $errors->has('nim') ? ' has-error' : '' }}">
-                            <label for="nim" class="col-md-4 control-label">Nim</label>
+  <title>Altair Admin v2.2.0 - Login Page</title>
 
-                            <div class="col-md-6">
-                                <input id="nim" type="text" class="form-control" name="nim" value="{{ old('nim') }}" required autofocus>
+  {{-- <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500' rel='stylesheet' type='text/css'> --}}
 
-                                @if ($errors->has('nim'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('nim') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nama</label>
+  <!-- uikit -->
+  <link rel="stylesheet" href="{{asset('altair/bower_components/uikit/css/uikit.almost-flat.min.css')}}" />
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+  <!-- altair admin login page -->
+  <link rel="stylesheet" href="{{asset('altair/assets/css/login_page.min.css')}}" />
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('fakultas') ? ' has-error' : '' }}">
-                            <label for="fakultas" class="col-md-4 control-label">Fakultas</label>
-
-                            <div class="col-md-6">
-                                <input id="fakultas" type="fakultas" class="form-control" name="fakultas" required>
-
-                                @if ($errors->has('fakultas'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fakultas') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('progdi') ? ' has-error' : '' }}">
-                            <label for="progdi" class="col-md-4 control-label">Program Studi</label>
-
-                            <div class="col-md-6">
-                                <input id="progdi" type="progdi" class="form-control" name="progdi" required>
-
-                                @if ($errors->has('progdi'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('progdi') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('tanggal_lahir') ? ' has-error' : '' }}">
-                            <label for="tanggal_lahir" class="col-md-4 control-label">Tanggal Lahir</label>
-
-                            <div class="col-md-6">
-                                <input id="tanggal_lahir" type="tanggal_lahir" class="form-control" name="tanggal_lahir" required placeholder="tanggal-bulan-tahun">
-
-                                @if ($errors->has('tanggal_lahir'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('tanggal_lahir') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+</head>
+<body class="login_page">
+  <div class="login_page_wrapper">
+    <div class="md-card" id="login_card">
+      <div class="md-card-content large-padding" id="register_form">
+        <button type="button" class="uk-position-top-right uk-close uk-margin-right uk-margin-top back_to_login"></button>
+        <h2 class="heading_a uk-margin-medium-bottom">Create an account</h2>
+        {{-- form register --}}
+        <form action="{{route('register')}}" method="POST">
+          {{ csrf_field() }}
+          <div class="uk-form-row">
+            <label for="register_username">Name</label>
+            <input 
+              class="
+                md-input
+                {{$errors->has('name') ? ' md-input-danger' : ''}}
+                " 
+              type="text" 
+              id="register_username" 
+              name="name" />
+          </div>
+          <div class="uk-form-row">
+            <label for="register_username">Email</label>
+            <input 
+              class="
+                md-input
+                {{$errors->has('email') ? ' md-input-danger' : ''}}
+                "
+              type="text" 
+              id="register_username" 
+              name="email" />
+          </div>
+          <div class="uk-form-row">
+            <label for="register_password">Password</label>
+            <input 
+              class="
+                md-input
+                {{$errors->has('password') ? ' md-input-danger' : ''}}
+                " 
+              type="password" 
+              id="register_password" 
+              name="password" />
+          </div>
+          <div class="uk-form-row">
+            <label for="register_password_repeat">Repeat Password</label>
+            <input 
+              class="
+                md-input
+                {{$errors->has('password_confirmation') ? ' md-input-danger' : ''}}
+                " 
+                type="password" 
+                id="register_password_repeat" 
+                name="password_confirmation" />
+          </div>
+          <div class="uk-margin-medium-top">
+            <button type="submit" class="md-btn md-btn-primary md-btn-block md-btn-large">Sign Up</button>
+          </div>
+          <div class="uk-margin-top">
+            <a href="{{route('login')}}" class="uk-float-right"><i class="uk-icon-arrow-circle-left"></i> login</a>
+            <span class="icheck-inline"></span>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+
+  <!-- common functions -->
+  <script src="{{asset('altair/assets/js/common.min.js')}}"></script>
+  <!-- altair core functions -->
+  <script src="{{asset('altair/assets/js/altair_admin_common.min.js')}}"></script>
+
+  <!-- altair login page functions -->
+  <script src="{{asset('altair/assets/js/pages/login.min.js')}}"></script>
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-65191727-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>

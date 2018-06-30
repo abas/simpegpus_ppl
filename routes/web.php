@@ -11,28 +11,40 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::any('/csrf', function () {
+  return csrf_token();
 });
+  
+Route::get('/','PegawaiController@getPegawaiAllIndex')->name('get-absen-index');
+
+Route::group(['prefix'=>'absen'],function(){
+  // Route::get('/','PegawaiController@getPegawaiAllIndex')->name('get-pegawai-index');
+  Route::get('/get','AbsenController@getAbsenAll')->name('get-absen');
+  Route::get('/get/{id}','AbsenController@getAbsenByID')->name('get-absen-id');
+  Route::get('/get/delete/{id}','AbsenController@getDelete')->name('get-delete-id');
+  Route::get('/get/deleteall','AbsenController@getDeleteAll')->name('get-delete-all');
+  Route::post('/post','AbsenController@postAbsen')->name('post-absen');
+});
+
+Route::group(['prefix'=>'pegawai'],function(){
+  Route::get('/get','PegawaiController@getPegawaiAll')->name('get-pegawai');
+  Route::get('/get/{id}','PegawaiController@getPegawaiByID')->name('get-pegawai-id');
+  Route::get('/get/delete/{id}','PegawaiController@getDeleteByID')->name('get-delete-id');
+  Route::get('/get/deleteall','PegawaiController@getDeleteAll')->name('get-delete-all');
+  Route::get('/get/update/{id}','PegawaiController@getUpdate')->name('get-update-id');
+  Route::post('/post/update/{id}','PegawaiController@postUpdate')->name('post-update-id');
+
+});
+
+Route::group(['prefix'=>'mutasi'],function(){
+  Route::get('/','MutasiController@getMutasi')->name('get-mutasi-index');
+  Route::get('/get','MutasiController@getMutasiAll')->name('get-mutasi');
+  Route::post('/post','MutasiController@postMutasi')->name('post-mutasi');
+});
+
+
+// Auth::routes();
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-
-Route::group(['middleware'=>'auth'],function(){
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::group(['prefix'=>'home'],function(){
-        Route::get('/add',['as'=>'add','uses'=>'HomeController@add']);
-        Route::post('/add',['as'=>'addData','uses'=>'HomeController@addData']);
-    });
-});
-
-
-// API public ===============================================
-// get All User
-Route::get('/users','APIController@get_user');
-
-// get Specific User
-Route::get('/users/{id}','APIController@get_user_info');
-
-// is User Admin ?
-Route::get('/users/is-admin/{id}','APIController@isAdmin');
+Route::get('/home', 'HomeController@index')->name('dashboard');
