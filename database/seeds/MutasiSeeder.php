@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 use Carbon\Carbon;
 
 class MutasiSeeder extends Seeder
@@ -11,7 +10,7 @@ class MutasiSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker,Carbon $carbon)
+    public function run(Carbon $carbon)
     {
         DB::table('mutasis')->insert([
             'pegawai_id'    => 7,
