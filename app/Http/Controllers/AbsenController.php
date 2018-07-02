@@ -35,7 +35,9 @@ class AbsenController extends Controller
     
     $lastAbsen = Absen::where('pegawai_id',$req->pegawai_id)->first();
     if(!Absen::null($lastAbsen)){
-      if(Carbon::now()->toDateString() == $lastAbsen->created_at->toDateString()){
+      $sudahAbsen = Carbon::now()->toDateString() == $lastAbsen->created_at->toDateString(); 
+      return $sudahAbsen;
+      if($sudahAbsen){
         // return ['msg'=>'sudah absen'];
         Session::flash('sudah_absen',true);
         return Redirect::back();
