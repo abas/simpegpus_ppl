@@ -37,7 +37,7 @@ class AbsenController extends Controller
     if(!Absen::null($lastAbsen)){
       return [
         'tgl sekarang'=>Carbon::now()->toDateString(),
-        'terakhir pegawai absen'=>$lastAbsen
+        'terakhir pegawai absen'=>$lastAbsen->created_at->toDateString()
       ];
       $sudahAbsen = Carbon::now()->toDateString() == $lastAbsen->created_at->toDateString(); 
       return $sudahAbsen ? ['status'=>'sudah absen'] : ['status'=>'belum absen'];
