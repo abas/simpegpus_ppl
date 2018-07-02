@@ -26,12 +26,6 @@
               <div class="uk-dropdown uk-dropdown-small">
                 <ul class="uk-nav js-uk-prevent">
                   <li>
-                    <a href="#">My profile</a>
-                  </li>
-                  <li>
-                    <a href="#">Settings</a>
-                  </li>
-                  <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

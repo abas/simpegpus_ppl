@@ -16,12 +16,25 @@
       </div>
       <div class="menu_section">
         <ul>
-          <li class="current_section" title="Dashboard">
-            <a href="#">
+          <li 
+            <?php
+              \Request::route()->getName() == 'dashboard' ?
+              "class='current_section '" : ""
+            ?>
+            title="Pegawai" data-uk-tooltip={pos:'right'}>
+            <a href="{{route('dashboard')}}">
               <span class="menu_icon">
-                <i class="material-icons">&#xE871;</i>
+                <i class="material-icons">recent_actors</i>
               </span>
-              <span class="menu_title">Dashboard</span>
+              <span class="menu_title">Pegawai</span>
+            </a>
+          </li>
+          <li class="" title="Absen">
+            <a href="{{route('dashboard')}}">
+              <span class="menu_icon">
+                <i class="material-icons">playlist_add_check</i>
+              </span>
+              <span class="menu_title">Absen</span>
             </a>
           </li>
           <li>
