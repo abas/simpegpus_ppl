@@ -12,9 +12,9 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-    env('APP_ENV') == 'production' ? 
-    'default' => env('DB_CONNECTION', 'heroku') :
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('APP_ENV') == 'production' ? 
+        env('DB_CONNECTION', 'heroku') : 
+        env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
