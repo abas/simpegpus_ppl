@@ -33,8 +33,12 @@ class AbsenController extends Controller
       return ['msg'=>'error : pegawai not found']; 
     } 
     
-    $lastAbsen = Absen::where('pegawai_id',$req->pegawai_id)->first();
+    $lastAbsen = Absen::where('pegawai_id',$req->pegawai_id)->orderBy('created_at','desc')->first();
     if(!Absen::null($lastAbsen)){
+      return [
+        'tgl sekarang'=>Carbon::now()->toDateString(),
+        'terakhir pegawai absen'=>$lastAbsen
+      ];
       $sudahAbsen = Carbon::now()->toDateString() == $lastAbsen->created_at->toDateString(); 
       return $sudahAbsen ? ['status'=>'sudah absen'] : ['status'=>'belum absen'];
       if($sudahAbsen){
