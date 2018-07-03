@@ -20,20 +20,28 @@ class InstansiController extends Controller
         $validator = Validator::make($req->all(),[
             'nama_instansi' => 'required|string|max:225'
         ]);if($validator->fails()){
-            return $validator->errors();
+            Session::flash('instansi_errval',true);
+            return Redirect::bask();
+            // return $validator->errors();
         }
-
+        
         $newInstansi = Ansi::create($req->all());
         if($newInstansi){
-            return ['msg'=>'success add'];
+            Session::flash('instansi_created',true);
+            return Redirect::back();
+            // return ['msg'=>'success add'];
         }
-        return ['msg'=>'failed add'];
+        Session::flash('instansi_failed',true);
+        return Redirect::back();
+        // return ['msg'=>'failed add'];
     }
 
     public function getEditInstansi($id)
     {
         $instansi = Ansi::find($id);if($instansi == null){
-            return ['obj'=>null];
+            Session::flash('instansi_notfound',true);
+            return Redirect::back();
+            // return ['obj'=>null];
         }
         Session::flash('instansi_update',true);
         return Redirect::back()->with('instansi',$instansi);
