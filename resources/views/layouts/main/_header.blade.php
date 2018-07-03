@@ -21,7 +21,7 @@
             </li>
             <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
               <a href="#" class="user_action_image">
-                <img class="md-user-image" src="{{asset('altair/assets/img/avatars/avatar_11.png')}}" alt="" />
+                <img class="md-user-image" src="https://abas.github.io/css/images/avatar.svg" alt="" />
               </a>
               <div class="uk-dropdown uk-dropdown-small">
                 <ul class="uk-nav js-uk-prevent">
