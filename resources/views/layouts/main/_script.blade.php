@@ -6,32 +6,15 @@
 <script src="{{asset('altair/assets/js/altair_admin_common.min.js')}}"></script>
 
 <!-- page specific plugins -->
-<!-- d3 -->
-<script src="{{asset('altair/bower_components/d3/d3.min.js')}}"></script>
-<!-- metrics graphics (charts) -->
-<script src="{{asset('altair/bower_components/metrics-graphics/dist/metricsgraphics.min.js')}}"></script>
-<!-- chartist (charts) -->
-<script src="{{asset('altair/bower_components/chartist/dist/chartist.min.js')}}"></script>
-<!-- maplace (google maps) -->
-{{--
-<script src="{{asset('altair/http://maps.google.com/maps/api/js?sensor=true"></script> --}}
-<script src="{{asset('altair/bower_components/maplace-js/dist/maplace.min.js')}}"></script>
 <!-- peity (small charts) -->
 <script src="{{asset('altair/bower_components/peity/jquery.peity.min.js')}}"></script>
 <!-- easy-pie-chart (circular statistics) -->
 <script src="{{asset('altair/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js')}}"></script>
-<!-- countUp -->
-<script src="{{asset('altair/bower_components/countUp.js/countUp.min.js')}}"></script>
-<!-- handlebars.js -->
-<script src="{{asset('altair/bower_components/handlebars/handlebars.min.js')}}"></script>
-<script src="{{asset('altair/assets/js/custom/handlebars_helpers.min.js')}}"></script>
 <!-- CLNDR -->
 <script src="{{asset('altair/bower_components/clndr/src/clndr.js')}}"></script>
 <!-- fitvids -->
 <script src="{{asset('altair/bower_components/fitvids/jquery.fitvids.js')}}"></script>
 
-<!--  dashbord functions -->
-<script src="{{asset('altair/assets/js/pages/dashboard.min.js')}}"></script>
 <script>
   $(function () {
     // enable hires images
@@ -43,21 +26,6 @@
   });
 </script>
 <script>
-  (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-  ga('create', 'UA-65191727-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<script>
   $(function () {
     var $switcher = $('#style_switcher'),
       $switcher_toggle = $('#style_switcher_toggle'),
@@ -66,7 +34,6 @@
       $boxed_layout_toggle = $('#style_layout_boxed'),
       $accordion_mode_toggle = $('#accordion_mode_main_menu'),
       $body = $('body');
-
 
     $switcher_toggle.click(function (e) {
       e.preventDefault();
@@ -171,3 +138,4 @@
   });
 </script>
 {{-- end script --}}
+@yield('_addscript')

@@ -81,10 +81,10 @@ return [
         
         'heroku' => [
             'driver'   => 'pgsql',
-            'host'     => parse_url(getenv("DATABASE_URL"))["host"],
-            'database' => substr(parse_url(getenv("DATABASE_URL"))["path"], 1),
-            'username' => parse_url(getenv("DATABASE_URL"))["user"],
-            'password' => parse_url(getenv("DATABASE_URL"))["pass"],
+            'host'     => env('APP_ENV') != 'local' ? parse_url(getenv("DATABASE_URL"))["host"] : '',
+            'database' => env('APP_ENV') == 'local' ? '' : substr(parse_url(getenv("DATABASE_URL"))["path"], 1),
+            'username' => env('APP_ENV') != 'local' ? parse_url(getenv("DATABASE_URL"))["user"] : '',
+            'password' => env('APP_ENV') != 'local' ? parse_url(getenv("DATABASE_URL"))["pass"] : '',
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',

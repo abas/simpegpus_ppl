@@ -24,13 +24,36 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function pegawai()
     {
         $pegawais = Pegawai::select('*')->paginate(6);
         $newPegawais = Pegawai::orderBy('created_at','desc')->take(5)->get();
         // return $newPegawai;
-        return view('home',compact(
+        return view('admin.pegawai',compact(
             'pegawais','newPegawais'
         ));
+    }
+
+    public function absen()
+    {
+        $absens = Absen::select('*')->paginate(10);
+        // return $absens;
+        $absenRecordsToday = Absen::where(
+            'created_at','>=',Carbon::today()
+            )->get();
+        
+        return view('admin.absen_today',compact('absens','absenRecordsToday'));
+        // return $absenRecordsToday;
+    }
+
+    public function recordAbsens()
+    {
+        $recordGroup = Absen::select('id','pegawai_id','created_at','updated_at')
+                            ->get()
+                            ->groupBy(function($date){
+                                return Carbon::parse($date->created_at)->format('Y-m-d');
+                            });
+        
+        return view('admin.record_absen',compact('recordGroup'));
     }
 }

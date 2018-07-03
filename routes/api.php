@@ -48,6 +48,16 @@ Route::group(['prefix'=>'absen'],function(){
     return \App\Absen::all();
   });
 
+  
+  Route::any('/record_absens', function () {
+    $recordGroup = \App\Absen::select('id','pegawai_id','created_at')
+      ->get()
+      ->groupBy(function($date){
+          return Carbon::parse($date->created_at)->format('Y-m-d');
+      });
+    return $recordGroup;
+  });
+
   Route::any('get/pegawai{id_absen}',function($id_absen){
     $pegawai = \App\Absen::find($id_absen)->pegawai;
     return $pegawai;

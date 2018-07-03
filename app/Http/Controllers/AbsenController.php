@@ -87,8 +87,28 @@ class AbsenController extends Controller
     foreach($absens as $absen){
       if(!$absen->delete()){
         break;
-        return ['msg'=>'error : failed delete record'];
+        Session::flash('absen_failed_deleteall',true);
+        return Redirect::back();
+        // return ['msg'=>'error : failed delete record'];
       }
-    }return ['msg'=>'success : success delete all record'];
+      Session::flash('absen_deleteall',true);
+      return Redirect::back();
+    // }return ['msg'=>'success : success delete all record'];
+    }
+  }
+  public function getDeleteAllByDate($date)
+  {
+    $deleteAbsen = Absen::whereDate('created_at','=',$date)->get();
+    foreach($deleteAbsen as $absen){
+      if(!$absen->delete()){
+        break;
+        Session::flash('absen_failed_deleteall',true);
+        return Redirect::back();
+        // return ['msg'=>'error : failed delete record'];
+      }
+      // }return ['msg'=>'success : success delete all record'];
+    }
+    Session::flash('absen_success_deleteall',true);
+    return Redirect::back();
   }
 }

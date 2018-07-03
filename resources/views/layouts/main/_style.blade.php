@@ -1,12 +1,6 @@
 
   {{-- style --}}
   <!-- additional styles for plugins -->
-  <!-- weather icons -->
-  <link rel="stylesheet" href="{{asset('altair/bower_components/weather-icons/css/weather-icons.min.css')}}" media="all">
-  <!-- metrics graphics (charts) -->
-  <link rel="stylesheet" href="{{asset('altair/bower_components/metrics-graphics/dist/metricsgraphics.css')}}">
-  <!-- chartist -->
-  <link rel="stylesheet" href="{{asset('altair/bower_components/chartist/dist/chartist.min.css')}}">
   <!-- uikit -->
   <link rel="stylesheet" href="{{asset('altair/bower_components/uikit/css/uikit.almost-flat.min.css')}}" media="all">
   <!-- flag icons -->

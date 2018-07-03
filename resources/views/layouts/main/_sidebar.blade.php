@@ -16,12 +16,7 @@
       </div>
       <div class="menu_section">
         <ul>
-          <li 
-            <?php
-              \Request::route()->getName() == 'dashboard' ?
-              "class='current_section '" : ""
-            ?>
-            title="Pegawai" data-uk-tooltip={pos:'right'}>
+          <li title="Pegawai" data-uk-tooltip="{pos:'right'}">
             <a href="{{route('dashboard')}}">
               <span class="menu_icon">
                 <i class="material-icons">recent_actors</i>
@@ -29,24 +24,19 @@
               <span class="menu_title">Pegawai</span>
             </a>
           </li>
-          <li class="" title="Absen">
-            <a href="{{route('dashboard')}}">
-              <span class="menu_icon">
-                <i class="material-icons">playlist_add_check</i>
-              </span>
-              <span class="menu_title">Absen</span>
-            </a>
-          </li>
           <li>
             <a href="#">
               <span class="menu_icon">
-                <i class="material-icons">&#xE8D2;</i>
+                <i class="material-icons">fingerprint</i>
               </span>
-              <span class="menu_title">Forms</span>
+              <span class="menu_title">Absen</span>
             </a>
             <ul>
               <li>
-                <a href="#">Regular Elements</a>
+                <a href="{{route('absens')}}">List Hari Ini</a>
+              </li>
+              <li>
+                <a href="{{route('get-absen-records')}}">Records</a>
               </li>
             </ul>
           </li>

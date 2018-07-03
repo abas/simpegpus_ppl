@@ -17,34 +17,41 @@ Route::any('/csrf', function () {
   
 Route::get('/','PegawaiController@getPegawaiAllIndex')->name('get-absen-index');
 
-Route::group(['prefix'=>'absen'],function(){
-  // Route::get('/','PegawaiController@getPegawaiAllIndex')->name('get-pegawai-index');
-  Route::get('/get','AbsenController@getAbsenAll')->name('get-absen');
-  Route::get('/get/{id}','AbsenController@getAbsenByID')->name('get-absen-id');
-  Route::get('/get/delete/{id}','AbsenController@getDelete')->name('get-delete-id');
-  Route::get('/get/deleteall','AbsenController@getDeleteAll')->name('get-delete-all');
-  Route::post('/post','AbsenController@postAbsen')->name('post-absen');
-});
-
-Route::group(['prefix'=>'pegawai'],function(){
-  Route::get('/get','PegawaiController@getPegawaiAll')->name('get-pegawai');
-  Route::get('/get/{id}','PegawaiController@getPegawaiByID')->name('get-pegawai-id');
-  Route::get('/get/delete/{id}','PegawaiController@getDeleteByID')->name('get-delete-id');
-  Route::get('/get/deleteall','PegawaiController@getDeleteAll')->name('get-delete-all');
-  Route::get('/get/update/{id}','PegawaiController@getUpdate')->name('get-update-id');
-  Route::post('/post/update/{id}','PegawaiController@postUpdate')->name('post-update-id');
-
-});
-
-Route::group(['prefix'=>'mutasi'],function(){
-  Route::get('/','MutasiController@getMutasi')->name('get-mutasi-index');
-  Route::get('/get','MutasiController@getMutasiAll')->name('get-mutasi');
-  Route::post('/post','MutasiController@postMutasi')->name('post-mutasi');
-});
-
 
 // Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('dashboard');
+Route::group(['prefix' => 'admin',['middleware'=>'auth']], function () {
+  Route::get('/', 'HomeController@pegawai')->name('dashboard');
+  Route::get('/absens', 'HomeController@absen')->name('absens');
+  
+  Route::group(['prefix'=>'absen'],function(){
+    // Route::get('/','PegawaiController@getPegawaiAllIndex')->name('get-pegawai-index');
+    Route::get('/get','AbsenController@getAbsenAll')->name('get-absen');
+    Route::get('/get/{id}','AbsenController@getAbsenByID')->name('get-absen-id');
+    Route::get('/get/delete/{id}','AbsenController@getDelete')->name('get-absen-delete-id');
+    Route::get('/get/deleteall','AbsenController@getDeleteAll')->name('get-absen-delete-all');
+    Route::get('/get/deleteall/{date}','AbsenController@getDeleteAllByDate')->name('get-absen_deleteall-by-date');
+    Route::post('/post','AbsenController@postAbsen')->name('post-absen');
+    Route::get('/records','HomeController@recordAbsens')->name('get-absen-records');
+  });
+
+  Route::group(['prefix'=>'pegawai'],function(){
+    Route::get('/get','PegawaiController@getPegawaiAll')->name('get-pegawai');
+    Route::post('/post','PegawaiController@postPegawai')->name('post-pegawai');
+    Route::get('/get/{id}','PegawaiController@getPegawaiByID')->name('get-pegawai-id');
+    Route::get('/get/delete/{id}','PegawaiController@getDeleteByID')->name('get-pegawai-delete-id');
+    Route::get('/get/deleteall','PegawaiController@getDeleteAll')->name('get-pegawai-delete-all');
+    Route::get('/get/update/{id}','PegawaiController@getUpdate')->name('get-pegawai-update-id');
+    Route::post('/post/update/{id}','PegawaiController@postUpdate')->name('post-pegawai-update-id');
+
+  });
+
+  Route::group(['prefix'=>'mutasi'],function(){
+    Route::get('/','MutasiController@getMutasi')->name('get-mutasi-index');
+    Route::get('/get','MutasiController@getMutasiAll')->name('get-mutasi');
+    Route::post('/post','MutasiController@postMutasi')->name('post-mutasi');
+  });
+
+});
