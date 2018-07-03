@@ -13,7 +13,7 @@ class AbsenSeeder extends Seeder
     public function run(Carbon $carbon)
     {
         for ($i=1; $i < 16; $i++) { 
-            DB::table('pegawais')->insert([
+            DB::table('absens')->insert([
                 'pegawai_id'=>$i,
                 'created_at'=>$carbon->now()->toDateString(),
                 'updated_at'=>$carbon->now()->toDateString()
