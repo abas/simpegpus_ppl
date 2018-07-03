@@ -4,10 +4,10 @@
       <div class="sidebar_main_header">
         <div class="sidebar_logo">
           <a href="{{url('/')}}" class="sSidebar_hide">
-            <img src="https://abas.github.io/css/images/avatar.svg" alt="" height="15" width="71" />
+            <img class="md-user-image" src="https://abas.github.io/css/images/avatar.svg" alt="" height="15" width="71" />
           </a>
           <a href="{{url('/')}}" class="sSidebar_show">
-            <img src="https://abas.github.io/css/images/avatar.svg" alt="" height="32" width="32" />
+            <img class="md-user-image" src="https://abas.github.io/css/images/avatar.svg" alt="" height="32" width="32" />
           </a>
         </div>
         <div class="sidebar_actions">
