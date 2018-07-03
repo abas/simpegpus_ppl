@@ -73,7 +73,7 @@
       @php $i++;@endphp @endforeach
     </div>
 
-    <!-- large chart -->
+    <!-- table -->
     <div class="uk-grid">
       <div class="uk-width-1-1">
         <div class="md-card">
@@ -122,7 +122,7 @@
                     <td>{{$p->no_ktp}}</td>
                     <td>{{$p->gaji}}</td>
                     <td>
-                      {{$np->status_pegawai == 2 ? 'active' : ''}} {{$np->status_pegawai == 1 ? 'waiting' : ''}} {{$np->status_pegawai == 0 ? 'inactive'
+                      {{$p->status_pegawai == 2 ? 'active' : ''}} {{$p->status_pegawai == 1 ? 'waiting' : ''}} {{$p->status_pegawai == 0 ? 'inactive'
                       : ''}}
                     </td>
                     {{--
@@ -132,7 +132,7 @@
                       <a data-uk-tooltip="{pos:'top'}" title="Update pegawai" href="{{route('get-pegawai-update-id',$p->id)}}">
                         <i class="md-icon material-icons uk-text-success">edit</i>
                       </a>
-                      <a data-uk-tooltip="{pos:'top'}" title="Hapus pegawai" href="{{route('get-pegawai-delete-id',$np->id)}}">
+                      <a data-uk-tooltip="{pos:'top'}" title="Hapus pegawai" href="{{route('get-pegawai-delete-id',$p->id)}}">
                         <i class="md-icon material-icons uk-text-danger">remove_circle</i>
                       </a>
                     </td>
@@ -146,6 +146,7 @@
         </div>
       </div>
     </div>
+    {{-- end table --}}
   </div>
 </div>
 
@@ -233,10 +234,11 @@
         </div>
         <div class="uk-form-row">
           <label for="status">Status</label>
-          <input class="
+          <input min="0" max="2"
+                  class="
                   md-input
                   {{$errors->has('status') ? ' md-input-danger' : ''}}
-                  " type="text" id="status" name="status_pegawai" />
+                  " type="number" id="status" name="status_pegawai" />
         </div>
         <div class="uk-modal-footer uk-text-right">
           <button type="button" class="md-btn md-btn-flat md-btn-flat-danger uk-modal-close">Close</button>

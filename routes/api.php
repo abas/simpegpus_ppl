@@ -134,9 +134,14 @@ Route::group(['prefix' => 'mutasi'], function () {
 });
 
 Route::group(['prefix' => 'instansi'], function () {
-  Route::get('get', function () {
+  Route::any('get', function () {
     return \App\Instansi::all() == null ? ['msg'=>null] : \App\Instansi::all();
   });
+  Route::any('getall', 'InstansiController@getInstansi');
+  Route::any('getid/{id}','InstansiController@getEditInstansi');
+  Route::any('postadd','InstansiController@postInstansiAdd');
+  Route::any('postupdate/{id}','InstansiController@postUpdateInstansi');
+  Route::any('getdelete/{id}','InstansiController@getDeleteInstansiByID');
 });
 
 Route::group(['prefix' => 'pegawai'], function () {

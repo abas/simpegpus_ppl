@@ -48,26 +48,13 @@
 <!-- page specific plugins -->
 <!-- datatables -->
 <script src="{{asset('altair/bower_components/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<!-- datatables colVis-->
-<script src="{{asset('altair/bower_components/datatables-colvis/js/dataTables.colVis.js')}}"></script>
 <!-- datatables tableTools-->
 <script src="{{asset('altair/bower_components/datatables-tabletools/js/dataTables.tableTools.js')}}"></script>
 <!-- datatables custom integration -->
 <script src="{{asset('altair/assets/js/custom/datatables_uikit.min.js')}}"></script>
-
 <!--  datatables functions -->
 <script src="{{asset('altair/assets/js/pages/plugins_datatables.min.js')}}"></script>
 
-<script>
-  $(function () {
-    // enable hires images
-    altair_helpers.retina_images();
-    // fastClick (touch devices)
-    if (Modernizr.touch) {
-      FastClick.attach(document.body);
-    }
-  });
-</script>
 <script>
   @if(Session::has('absen_failed_deleteall'))
     swal("Warning!","Somthing Error will delete record","info")

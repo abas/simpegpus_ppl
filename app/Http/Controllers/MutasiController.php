@@ -17,7 +17,7 @@ class MutasiController extends Controller
 
     public function getMutasiAll()
     {
-        return Mutasi::all();
+        return Mutasi::orderBy('created_at','desc')->get();
     }
 
     public function postMutasi(Request $req)

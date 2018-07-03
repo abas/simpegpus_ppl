@@ -21,9 +21,11 @@ class CreateMutasisTable extends Migration
             $table->timestamps();
 
             $table->foreign('pegawai_id')
-                ->references('id')->on('pegawais');
+                ->references('id')->on('pegawais')
+                ->onDelete('cascade');
             $table->foreign('instansi_id')
-                ->references('id')->on('instansis');
+                ->references('id')->on('instansis')
+                ->onDelete('cascade');
                 
         });
     }

@@ -15,7 +15,7 @@ class CreateInstansisTable extends Migration
     {
         Schema::create('instansis', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_instansi')->nullable();
+            $table->string('nama_instansi');
             $table->timestamps();
         });
     }

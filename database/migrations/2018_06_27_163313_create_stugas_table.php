@@ -21,7 +21,8 @@ class CreateStugasTable extends Migration
             $table->timestamps();
 
             $table->foreign('pegawai_id')
-                  ->references('id')->on('pegawais');
+                  ->references('id')->on('pegawais')
+                  ->onDelete('cascade');
         });
     }
 

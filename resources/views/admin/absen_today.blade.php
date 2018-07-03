@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('_addstyle') @endsection @section('content') {{-- content --}}
+@extends('layouts.app') @section('_addmeta')
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
+@endsection @section('content') {{-- content --}}
 <div id="page_content">
   <div id="page_content_inner">
     <!-- statistics (small charts) -->
@@ -118,4 +120,12 @@
     </div>
   </div>
 </div>
-{{-- end content --}} @endsection @section('_addscript') @endsection
+{{-- end content --}} @endsection @section('_addscript')
+<script>
+  @if(Session::has('absen_success_deleted'))
+    swal("Success!", "record berhasil di hapus.", "success")
+  @elseif(Session::has('absen_failed_deleted'))
+    swal("Warning!", "Gagal menghapus record.", "warning")
+  @endif
+</script>
+@endsection

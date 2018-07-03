@@ -55,4 +55,12 @@ Route::group(['prefix' => 'admin',['middleware'=>'auth']], function () {
     Route::post('/post','MutasiController@postMutasi')->name('post-mutasi');
   });
 
+  Route::group(['prefix' => 'instansi'], function () {
+    Route::get('/','InstansiController@getInstansi')->name('get-instansi-index');
+    Route::post('/','InstansiController@postInstansiAdd')->name('post-instansi-add');
+    Route::get('/get/update/{id}','InstansiController@getEditInstansi')->name('get-instansi-update');
+    Route::post('/get/update/{id}','InstansiController@postUpdateInstansi')->name('get-instansi-updated');
+    Route::get('/get/delete/{id}','InstansiController@getDeleteInstansiByID')->name('get-instansi-delete');
+  });
+
 });

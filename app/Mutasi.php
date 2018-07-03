@@ -10,4 +10,9 @@ class Mutasi extends Model
     protected $fillable = [
         'status_mutasi','pegawai_id','instansi_id'
     ];
+    
+    public static function getCountOnInstansi($instansi_id)
+    {
+        return Mutasi::where('instansi_id',$instansi_id)->get()->count();
+    }
 }

@@ -12,7 +12,7 @@ class InstansiSeed extends Seeder
      */
     public function run(Carbon $carbon)
     {
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             DB::table('instansis')->insert([
               'nama_instansi' => str_random(5),
               'created_at'    => $carbon->now()->toDateString(),

@@ -77,8 +77,13 @@ class AbsenController extends Controller
   {
     $delete_absen = Absen::find($id)->delete();
     if($delete_absen){
-      return ['msg'=>'success : absen deleted'];
-    }return ['msg'=>'error : can\'t delete absen'];
+      Session::flash('absen_success_deleted',true);
+      return Redirect::back();
+      // return ['msg'=>'success : absen deleted'];
+    }
+    Session::flash('absen_failed_deleted',true);
+    return Redirect::back();
+    // return ['msg'=>'error : can\'t delete absen'];
   }
 
   public function getDeleteAll()
@@ -120,7 +125,6 @@ class AbsenController extends Controller
     
     header("Content-type: application/vnd.ms-excel");
     header("Content-Disposition: attachment; filename=$file");
-    $inner = "";
     echo "
       <table  >
         <thead>
@@ -146,8 +150,5 @@ class AbsenController extends Controller
         ";
         }
     echo "</tbody></table>";
-    // return $inner;
-    //  echo $test; 
-    // echo $download;
   }
 }

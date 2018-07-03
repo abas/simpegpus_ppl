@@ -41,7 +41,7 @@ class PegawaiController extends Controller
       'nama'=>'required|string',
       'no_ktp'=>'required|string|max:225|unique:pegawais',
       'gaji'=>'required|integer|min:1000',
-      'status_pegawai'=>'required|min:1|max:2'
+      'status_pegawai'=>'required|integer|min:1|max:2'
     ]);if($validator->fails()){
       // return $validator->errors();
       Session::flash('pegawai_errval',true);

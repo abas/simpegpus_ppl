@@ -40,6 +40,14 @@
               </li>
             </ul>
           </li>
+          <li title="Pegawai" data-uk-tooltip="{pos:'right'}">
+            <a href="{{route('get-instansi-index')}}">
+              <span class="menu_icon">
+                <i class="material-icons">domain</i>
+              </span>
+              <span class="menu_title">Instansi</span>
+            </a>
+          </li>
         </ul>
       </div>
     </aside>
