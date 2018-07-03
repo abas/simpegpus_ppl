@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session,Redirect,Validator;
 use App\Instansi as Ansi;
+use Carbon\Carbon;
 
 class InstansiController extends Controller
 {
@@ -85,6 +86,41 @@ class InstansiController extends Controller
         Session::flash('instansi_failed_deleted',true);
         return Redirect::back();
         // return ['msg'=>'failed to delete'];
+    }
+
+    public function recordDownloadInstansi()
+    {
+        $instansis = Ansi::all();
+        // return $absensRecord;
+        $file="record_instansi_".Carbon::now()->toDateString().".xls";
+        
+        header("Content-type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=$file");
+        echo "
+        <table  >
+            <thead>
+            <tr>
+                <th>ID</td>
+                <th>Nama Instansi</td>
+                <th>Mutasi</td>
+                <th>Tercatat</td>
+                <th>TerUpdate</td>
+            </tr>
+            </thead>
+            <tbody>
+            ";
+        foreach($instansis as $data){
+            echo "
+            <tr>
+                <td>$data->id</td>
+                <td>$data->nama_instansi</td>
+                <td>".\App\Mutasi::getCountOnInstansi($data->id)."</td>
+                <td>$data->created_at</td>
+                <td>$data->updated_at</td>
+            </tr>
+            ";
+            }
+        echo "</tbody></table>";
     }
 
 }

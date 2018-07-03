@@ -61,7 +61,7 @@
     </center>
     <h4 class="heading_a uk-margin-bottom">List Instansi
         <a 
-          href="{{route('get-absen-records-download','asd')}}"
+          href="{{route('get-instansi-downloadrecord')}}"
           data-uk-tooltip="{pos:'right'}"
           title="Download Record"
           >

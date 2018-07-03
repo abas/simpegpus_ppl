@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin',['middleware'=>'auth']], function () {
     Route::get('/get/update/{id}','InstansiController@getEditInstansi')->name('get-instansi-update');
     Route::post('/get/update/{id}','InstansiController@postUpdateInstansi')->name('get-instansi-updated');
     Route::get('/get/delete/{id}','InstansiController@getDeleteInstansiByID')->name('get-instansi-delete');
+    Route::get('/get/download','InstansiController@recordDownloadInstansi')->name('get-instansi-downloadrecord');
   });
 
 });
