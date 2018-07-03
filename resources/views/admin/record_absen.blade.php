@@ -30,7 +30,7 @@
               <td>{{$absen->updated_at}}</td>
               @if($idx > 0)
               <td class="uk-text-center">
-                <a href="{route('#')}">
+                <a href="{{route('get-absen-records-download',$data_abs)}}">
                   <i class="md-icon material-icons uk-text-primary">cloud_download</i>
                 </a>
                 <a href="{{route('get-absen_deleteall-by-date',$data_abs)}}">

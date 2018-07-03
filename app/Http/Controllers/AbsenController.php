@@ -111,4 +111,43 @@ class AbsenController extends Controller
     Session::flash('absen_success_deleteall',true);
     return Redirect::back();
   }
+
+  public function recordAbsensDownload($date)
+  {
+    $absensRecord = Absen::whereDate('created_at','=',$date)->get();
+    // return $absensRecord;
+    $file="record_absen_".$date.".xls";
+    
+    header("Content-type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=$file");
+    $inner = "";
+    echo "
+      <table  >
+        <thead>
+          <tr>
+            <th>ID</td>
+            <th>Pegawai ID</td>
+            <th>Nama</td>
+            <th>Tercatat</td>
+            <th>TerUpdate</td>
+          </tr>
+        </thead>
+        <tbody>
+        ";
+      foreach($absensRecord as $data){
+        echo "
+          <tr>
+            <td>$data->id</td>
+            <td>$data->pegawai_id</td>
+            <td>".$data->pegawai->nama."</td>
+            <td>$data->created_at</td>
+            <td>$data->updated_at</td>
+          </tr>
+        ";
+        }
+    echo "</tbody></table>";
+    // return $inner;
+    //  echo $test; 
+    // echo $download;
+  }
 }

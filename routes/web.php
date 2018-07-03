@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin',['middleware'=>'auth']], function () {
     Route::get('/get/deleteall/{date}','AbsenController@getDeleteAllByDate')->name('get-absen_deleteall-by-date');
     Route::post('/post','AbsenController@postAbsen')->name('post-absen');
     Route::get('/records','HomeController@recordAbsens')->name('get-absen-records');
+    Route::get('/records/download/{date}','AbsenController@recordAbsensDownload')->name('get-absen-records-download');
   });
 
   Route::group(['prefix'=>'pegawai'],function(){
