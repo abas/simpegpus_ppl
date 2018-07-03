@@ -3,16 +3,52 @@
 @endsection @section('content') {{-- content --}}
 <div id="page_content">
   <div id="page_content_inner">
+      <h4 class="heading_a uk-margin-bottom">Data Absen
+          <a href="{{route('get-absen-records-download-all')}}" data-uk-tooltip="{pos:'right'}" title="Download Record">
+            <i class="md-icon material-icons uk-text-primary">cloud_download</i>
+          </a>
+        </h4>
+        <div class="md-card uk-margin-medium-bottom">
+          <div class="md-card-content">
+            <table id="dt_tableTools" class="uk-table" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Pegawai ID</th>
+                  <th>Nama</th>
+                  <th>Tanggal Terbuat</th>
+                  <th>Tanggal Diubah</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($absens as $ins)
+                <tr>
+                  <td>{{$ins->id}}</td>
+                  <td>{{$ins->pegawai_id}}</td>
+                  <td>{{$ins->pegawai->nama}}</td>
+                  <td>{{$ins->created_at}}</td>
+                  <td>{{$ins->updated_at}}</td>
+                  <td class="uk-text-center">
+                    <a data-uk-tooltip="{pos:'top'}" title="Hapus pegawai" href="{{route('get-absen-delete-id',$ins->id)}}">
+                      <i class="md-icon material-icons uk-text-danger">remove_circle</i>
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
     <!-- statistics (small charts) -->
-    @if($absenRecordsToday->count()
-    <1 ) <div>
-      <h3 class="uk-text-danger">Belum Ada Pegawai yg Absen</h3>
+    @if($absenRecordsToday->count() <1 ) <div>
+    <h3 class="uk-text-danger">Belum Ada Pegawai yg Absen</h3>
   </div>
   <div class="uk-grid uk-grid-width-large-1-5 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show"
     data-uk-sortable data-uk-grid-margin>
     @else
     <div>
-      <h3>Data Absen Pegawai</h3>
+      <h3>Absen Hari Ini</h3>
     </div>
     <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-3 uk-grid-medium uk-sortable sortable-handler hierarchical_show"
       data-uk-sortable data-uk-grid-margin>
@@ -69,11 +105,18 @@
             </ul>
           </div>
         </div>
-      </div>@endforeach @endif
+      </div>
+      @endforeach @endif
     </div>
-
-    <!-- large chart -->
     <div class="uk-grid">
+      <div class="uk-width-1-1">
+        <center>
+          {{$absenRecordsToday->links('pagination.uk')}}
+        </center>
+      </div>
+    </div>
+    <!-- large chart -->
+    {{-- <div class="uk-grid">
       <div class="uk-width-1-1">
         <div class="md-card">
           <div class="md-card-toolbar">
@@ -117,15 +160,24 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>
 {{-- end content --}} @endsection @section('_addscript')
+<!-- datatables -->
+<script src="{{asset('altair/bower_components/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+<!-- datatables tableTools-->
+<script src="{{asset('altair/bower_components/datatables-tabletools/js/dataTables.tableTools.js')}}"></script>
+<!-- datatables custom integration -->
+<script src="{{asset('altair/assets/js/custom/datatables_uikit.min.js')}}"></script>
+<!--  datatables functions -->
+<script src="{{asset('altair/assets/js/pages/plugins_datatables.min.js')}}"></script>
+
 <script>
   @if(Session::has('absen_success_deleted'))
-    swal("Success!", "record berhasil di hapus.", "success")
+  swal("Success!", "record berhasil di hapus.", "success")
   @elseif(Session::has('absen_failed_deleted'))
-    swal("Warning!", "Gagal menghapus record.", "warning")
+  swal("Warning!", "Gagal menghapus record.", "warning")
   @endif
 </script>
 @endsection

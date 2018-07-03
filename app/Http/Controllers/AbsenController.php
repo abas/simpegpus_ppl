@@ -151,4 +151,39 @@ class AbsenController extends Controller
         }
     echo "</tbody></table>";
   }
+
+  public function recordAbsensDownloadAll()
+  {
+    $absensRecord = Absen::all();
+    // return $absensRecord;
+    $file="record_absen_".Carbon::now()->toDateString().".xls";
+    
+    header("Content-type: application/vnd.ms-excel");
+    header("Content-Disposition: attachment; filename=$file");
+    echo "
+      <table  >
+        <thead>
+          <tr>
+            <th>ID</td>
+            <th>Pegawai ID</td>
+            <th>Nama</td>
+            <th>Tercatat</td>
+            <th>TerUpdate</td>
+          </tr>
+        </thead>
+        <tbody>
+        ";
+      foreach($absensRecord as $data){
+        echo "
+          <tr>
+            <td>$data->id</td>
+            <td>$data->pegawai_id</td>
+            <td>".$data->pegawai->nama."</td>
+            <td>$data->created_at</td>
+            <td>$data->updated_at</td>
+          </tr>
+        ";
+        }
+    echo "</tbody></table>";
+  }
 }

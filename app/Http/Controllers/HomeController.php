@@ -40,7 +40,7 @@ class HomeController extends Controller
         // return $absens;
         $absenRecordsToday = Absen::where(
             'created_at','>=',Carbon::today()
-            )->get();
+            )->paginate(8);
         
         return view('admin.absen_today',compact('absens','absenRecordsToday'));
         // return $absenRecordsToday;
